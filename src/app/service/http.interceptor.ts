@@ -9,14 +9,13 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators'
-import { CookieService } from 'ngx-cookie';
 
 
 @Injectable()
 export class HttpClientInterceptor implements HttpInterceptor {
   private csrf: string;
 
-  constructor(private cookieService: CookieService) {}
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log('HttpClientInterceptor')

@@ -41,10 +41,11 @@ ng g service service/auth --flat
 
 ng g interceptor service/http --flat
 
-# check in
+## check in
 
 git remote add origin http://github.com/He-Jianshan/Angular-.git
 git branch -M main
 git push -u orgin main
 
-
+## public url
+https://github.com/He-Jianshan/Angular-
