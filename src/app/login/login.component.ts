@@ -3,6 +3,11 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import {ErrorStateMatcher} from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../service/auth.service';
+import { Store, Select } from '@ngxs/store';
+import { LoginAction } from '../service/mystate.service';
+import { ILoginResult } from '../type';
+import { Observable } from 'rxjs';
+
 
 export class UsernameErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,6 +24,8 @@ export class UsernameErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
 
+  @Select(s => s.auth) result$: Observable<ILoginResult>;
+
   usernameFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('[a-zA-Z0-9]{4,}')
@@ -31,17 +38,21 @@ export class LoginComponent implements OnInit {
   matcher = new UsernameErrorStateMatcher();
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
-    private authService: AuthService) { }
+    private store: Store) { }
 
   ngOnInit(): void {
   }
 
   cancel(): void {
-    this.dialogRef.close();
+    this.close();
   }
 
   submit(): void {
-    this.authService.login({username:this.usernameFormControl.value, password: this.passwordFormControl.value})
-      .subscribe(r => console.log(r));
+    this.store.dispatch(new LoginAction({username:this.usernameFormControl.value, password: this.passwordFormControl.value}));
+    this.close();
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

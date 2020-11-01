@@ -9,4 +9,7 @@ export class ConfigService {
   getLoginUrl() {
     return `${this.BASE_URL}/login/token`;
   }
+  getLogoutUrl() {
+    return `${this.BASE_URL}/signout`
+  }
 }

@@ -41,6 +41,8 @@ ng g service service/auth --flat
 
 ng g interceptor service/http --flat
 
+npm install @ngxs/store --save
+
 ## check in
 
 git remote add origin http://github.com/He-Jianshan/Angular-.git

@@ -9,18 +9,18 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators'
+import { Store } from '@ngxs/store';
+import { ILoginResult } from '../type';
 
 
 @Injectable()
 export class HttpClientInterceptor implements HttpInterceptor {
   private csrf: string;
 
-  constructor() {}
+  constructor(private  store: Store) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('HttpClientInterceptor')
-    const token: string = localStorage.getItem('token');
-
+    const token = this.store.selectSnapshot<string>((state: {auth:ILoginResult}) => state.auth!?.token);
     if (token) {
         request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
     }
@@ -41,8 +41,7 @@ export class HttpClientInterceptor implements HttpInterceptor {
       tap(r => {
         if(r instanceof HttpResponse) {
           this.csrf = r.headers.get("XSRF-TOKEN")
-          console.log(this.csrf)
-        }
+       }
       })
     );
   }

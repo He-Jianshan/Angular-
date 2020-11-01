@@ -14,6 +14,9 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"; 
 import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingHttpClientInterceptor } from './service/http.interceptor';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
+import { MyState } from './service/mystate.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { LoadingHttpClientInterceptor } from './service/http.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxsModule.forRoot([MyState], {
+      developmentMode: !environment.production
+    }),
  
     IoMaterialModule,
   ],

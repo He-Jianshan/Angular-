@@ -8,3 +8,13 @@ export interface ILoginResult {
     token: string;
     status: string;
 }
+
+export interface IResponse {
+    message: string;
+    status: string;
+}
+
+export enum IStatus {
+    SUCCESS,
+    FAILURE,
+}

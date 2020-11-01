@@ -1,4 +1,11 @@
 <div class="banner" fxFlexFill fxLayoutAlign="space-between center" >
     <h1>Customer Relation Management</h1>
-    <div class="sign-in" (click)="openLogin()">sign in</div>
+    <div>
+        <div *ngIf="username"> 
+            <div>{{username}}</div>
+            <div (click)="signOut()">sign out</div>
+
+        </div>
+    </div>
+    <div *ngIf="!username" class="sign-in" (click)="openLogin()"> sign in</div>
 </div>
