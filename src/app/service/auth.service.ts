@@ -14,10 +14,9 @@ export class AuthService {
     private config: ConfigService) { }
 
   login(login: ILogin): Observable<ILoginResult> {
+    // get csrf key first
     return this.httpClient.get(this.config.getLoginUrl()).pipe(
-      switchMap(r => this.httpClient.post<ILoginResult>(this.config.getLoginUrl(),login, 
-      {headers: {"content-type": "application/json"},
-      withCredentials: true}))
+      switchMap(r => this.httpClient.post<ILoginResult>(this.config.getLoginUrl(),login))
     );
   }
 

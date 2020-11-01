@@ -1,10 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ILoginResult } from '../type';
+import { tap } from 'rxjs/operators';
+import { LoginComponent } from '../login/login.component';
 import { LogoutAction } from '../service/mystate.service';
+import { ILoginResult } from '../type';
 
 
 @Component({
@@ -19,10 +21,15 @@ export class BannerComponent implements OnInit {
   @Select(s => s.auth) result$: Observable<ILoginResult>;
 
   constructor(private dialog: MatDialog,
-    private store: Store) { }
+    private store: Store,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.result$.subscribe(r=>this.username=r!?.status == 'SUCCESS' ? r.message : null)
+    this.result$.pipe(
+      tap(r=>this.username=r!?.status == 'SUCCESS' ? r.message : null),
+      tap(r=>r && this.snackBar.open(r.message, r.status, {duration: 2000}))
+    ).subscribe(r=>r)
+    
   }
 
   openLogin(): void {

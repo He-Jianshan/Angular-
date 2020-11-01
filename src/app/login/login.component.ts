@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AuthService } from '../service/auth.service';
-import { Store, Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { LoginAction } from '../service/mystate.service';
-import { ILoginResult } from '../type';
-import { Observable } from 'rxjs';
 
 
 export class UsernameErrorStateMatcher implements ErrorStateMatcher {
@@ -24,7 +21,6 @@ export class UsernameErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
 
-  @Select(s => s.auth) result$: Observable<ILoginResult>;
 
   usernameFormControl = new FormControl('', [
     Validators.required,
@@ -38,7 +34,8 @@ export class LoginComponent implements OnInit {
   matcher = new UsernameErrorStateMatcher();
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
-    private store: Store) { }
+    private store: Store,
+    ) { }
 
   ngOnInit(): void {
   }
