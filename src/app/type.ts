@@ -18,3 +18,14 @@ export enum IStatus {
     SUCCESS,
     FAILURE,
 }
+
+export interface IRole {
+    name: string;
+}
+
+export  interface IUser {
+    username: string;
+    email: string;
+    roles: IRole[]
+}
+

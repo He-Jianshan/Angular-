@@ -17,6 +17,8 @@ import { LoadingHttpClientInterceptor } from './service/http.interceptor';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { MyState } from './service/mystate.service';
+import { UserComponent } from './user/user.component';
+import { RoleComponent } from './role/role.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MyState } from './service/mystate.service';
     RootComponent,
     BannerComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent,
+    RoleComponent
   ],
   imports: [
     BrowserModule,

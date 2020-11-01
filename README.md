@@ -43,11 +43,31 @@ ng g interceptor service/http --flat
 
 npm install @ngxs/store --save
 
+ng g component user --module app
+
+ng g component role --module app
+
+
 ## check in
 
 git remote add origin http://github.com/He-Jianshan/Angular-.git
 git branch -M main
 git push -u orgin main
 
-## public url
+## Source Code Url
+
 https://github.com/He-Jianshan/Angular-
+
+## Demo 
+
+https://home.hejianshan.com/
+
+## Reference Url
+
+https://angular.io/docs
+
+https://tburleson-layouts-demos.firebaseapp.com/#/docs
+
+https://material.angular.io/components/categories
+
+https://www.ngxs.io/
