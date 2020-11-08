@@ -23,6 +23,8 @@ import { RoleFormComponent } from './form/role-form/role-form.component';
 import { UserFormComponent } from './form/user-form/user-form.component';
 import { SidebarStateService } from './service/sidebar-state.service';
 import { Routes, RouterModule } from "@angular/router";
+import { UserStateService } from './service/user-state.service';
+import { RoleStateService } from './service/role-state.service';
 
 const routes: Routes = [
   {path: 'user', component: UserComponent },
@@ -47,7 +49,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxsModule.forRoot([MyState, SidebarStateService], {
+    NgxsModule.forRoot([MyState, SidebarStateService,
+      UserStateService, RoleStateService], {
       developmentMode: !environment.production
     }),
     RouterModule.forRoot(routes),

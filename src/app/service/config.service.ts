@@ -16,7 +16,15 @@ export class ConfigService {
   getUserUrl() {
     return `${this.BASE_URL}/user/user`;
   }
+  getUserNameUrl(username: string) {
+    const name = encodeURI(username);
+    return `${this.BASE_URL}/user/user/${name}`;
+  }
   getRoleUrl() {
     return `${this.BASE_URL}/user/role`;
+  }
+  getRoleNameUrl(rolename:string) {
+    const name = encodeURI(rolename);
+    return `${this.BASE_URL}/user/role/${name}`;
   }
 }

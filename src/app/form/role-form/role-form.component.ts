@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Store } from '@ngxs/store';
+import { AddRoleAction } from 'src/app/service/role-state.service';
 
 
 export class RoleErrorStateMatcher implements ErrorStateMatcher {
@@ -24,7 +26,8 @@ export class RoleFormComponent implements OnInit {
   
   matcher = new RoleErrorStateMatcher();
 
-  constructor(public dialogRef: MatDialogRef<RoleFormComponent>) { }
+  constructor(public dialogRef: MatDialogRef<RoleFormComponent>,
+    private store: Store) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +36,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   submit(): void {
+    this.store.dispatch(new AddRoleAction({name: this.rolenameFormControl.value}))
     this.close();
   }
 

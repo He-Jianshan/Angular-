@@ -16,4 +16,15 @@ export class UserService {
     return this.httpClient.get<IUser[]>(this.config.getUserUrl())
   }
 
+  addUser(user: IUser): Observable<IUser> {
+    return this.httpClient.post<IUser>(this.config.getUserUrl(), user);
+  }
+
+  updateUser(user: IUser): Observable<IUser> {
+    return this.httpClient.put<IUser>(this.config.getUserUrl(), user);
+  }
+
+  deleteUser(user: IUser): Observable<IUser> {
+    return this.httpClient.delete<IUser>(this.config.getUserNameUrl(user.username));
+  }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngxs/store';
+import { AddUserAction } from 'src/app/service/user-state.service';
 
 export class UserErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,7 +35,8 @@ export class UserFormComponent implements OnInit {
 
   matcher = new UserErrorStateMatcher();
 
-  constructor(public dialogRef: MatDialogRef<UserFormComponent>) { }
+  constructor(public dialogRef: MatDialogRef<UserFormComponent>,
+    private store: Store) { }
 
   ngOnInit(): void {
   }
@@ -42,6 +45,12 @@ export class UserFormComponent implements OnInit {
   }
 
   submit(): void {
+    this.store.dispatch(new AddUserAction({
+      username: this.usernameFormControl.value,
+      password: this.passwordFormControl.value,
+      email: this.emailFormControl.value,
+      roles: []
+    }))
     this.close();
   }
 
