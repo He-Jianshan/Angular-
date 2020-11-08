@@ -2,9 +2,23 @@
     background-color: lightslategrey;
 }
 
-mat-drawer-content {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+mat-drawer {
+    background-color: dimgray;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+a:hover, a:active{
+    color: lightgray;
+}
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin: 2em 2em 0 2em;
+}

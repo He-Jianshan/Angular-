@@ -22,7 +22,12 @@ import { RoleComponent } from './role/role.component';
 import { RoleFormComponent } from './form/role-form/role-form.component';
 import { UserFormComponent } from './form/user-form/user-form.component';
 import { SidebarStateService } from './service/sidebar-state.service';
+import { Routes, RouterModule } from "@angular/router";
 
+const routes: Routes = [
+  {path: 'user', component: UserComponent },
+  {path: 'role', component: RoleComponent }
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +50,7 @@ import { SidebarStateService } from './service/sidebar-state.service';
     NgxsModule.forRoot([MyState, SidebarStateService], {
       developmentMode: !environment.production
     }),
+    RouterModule.forRoot(routes),
  
     IoMaterialModule,
   ],

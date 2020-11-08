@@ -1,11 +1,18 @@
 <div class="main" fxFlexFill fxLayout="row wrap" fxLayoutAlign="space-evenly center" >
 
     <mat-drawer-container  *ngIf="hasLogin" [hasBackdrop]="false" fxFlexFill>
-        <mat-drawer #drawer opened mode="side">I'm a drawer
-
+        <mat-drawer #drawer opened mode="side">
+            <ul fxLayout="column" fxLayoutAlign="start start" class="navigation-items">
+                <li>
+                    <a routerLink="/user">User </a>
+                </li>
+                <li>
+                    <a routerLink="/role">Role </a>
+                </li>
+            </ul>
         </mat-drawer>
         <mat-drawer-content>
-            <app-user fxFlexFill></app-user>
+            <router-outlet></router-outlet>
         
         </mat-drawer-content>
     </mat-drawer-container>
