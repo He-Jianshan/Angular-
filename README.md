@@ -47,6 +47,15 @@ ng g component user --module app
 
 ng g component role --module app
 
+ng g service service/user  --flat
+
+ng g service service/role  --flat
+
+ng g component form/user-form --module ap
+
+ng g component form/role-form --module ap
+
+ng g service service/sidebar-state  --flat
 
 ## check in
 

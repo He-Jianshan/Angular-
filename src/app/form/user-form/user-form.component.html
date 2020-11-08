@@ -1,0 +1,34 @@
+
+<form class="user-form" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+    <div fxLayoutAlign="space-evenly"><h3>User</h3></div>
+    <mat-form-field >
+      <mat-label>Username</mat-label>
+      <input type="text" matInput [formControl]="usernameFormControl" [errorStateMatcher]="matcher"
+             placeholder="username">
+      <mat-error *ngIf="usernameFormControl.hasError('pattern') ">
+        Please enter a valid username
+      </mat-error>
+      <mat-error *ngIf="usernameFormControl.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field >
+        <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+        placeholder="password">
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field >
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+        placeholder="email">
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+        <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+    </div>
+    
+  </form>

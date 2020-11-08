@@ -1,11 +1,23 @@
 <div class="banner" fxFlexFill fxLayoutAlign="space-between center" >
-    <h1>Customer Relation Management</h1>
-    <div>
-        <div *ngIf="username"> 
-            <div>{{username}}</div>
-            <div (click)="signOut()">sign out</div>
-
+    <div class="title" fxLayoutGap="20px" fxLayout="row">
+        <div *ngIf="username">
+            <button (click)="toggleSidebar()">
+                <mat-icon>menu</mat-icon>
+            </button>
         </div>
+
+        <h1> Customer Relation Management</h1>
     </div>
-    <div *ngIf="!username" class="sign-in" (click)="openLogin()"> sign in</div>
+    <div *ngIf="username" class="title" fxLayoutAlign="space-evenly center" 
+        fxLayoutGap="20px" (click)="signOut()">
+        <button mat-fab color="primary" matTooltip="Logout">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <h2>{{username}}</h2>
+    </div>
+    <div *ngIf="!username" class="title">
+        <button mat-fab color="primary" matTooltip="Login"  (click)="openLogin()">
+            <mat-icon>login</mat-icon>
+        </button>
+    </div>
 </div>

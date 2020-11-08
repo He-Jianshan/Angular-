@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoginComponent } from '../login/login.component';
 import { LogoutAction } from '../service/mystate.service';
-import { ILoginResult } from '../type';
+import { ILoginResult, LOGIN } from '../type';
+import { ToggleAction } from '../service/sidebar-state.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class BannerComponent implements OnInit {
 
   ngOnInit(): void {
     this.result$.pipe(
-      tap(r=>this.username=r!?.status == 'SUCCESS' ? r.message : null),
+      tap(r=>this.username=r!?.status == LOGIN ? r.message : null),
       tap(r=>r && this.snackBar.open(r.message, r.status, {duration: 2000}))
     ).subscribe(r=>r)
     
@@ -38,5 +39,9 @@ export class BannerComponent implements OnInit {
 
   signOut(): void {
     this.store.dispatch(new LogoutAction());
+  }
+
+  toggleSidebar(): void {
+    this.store.dispatch(new ToggleAction())
   }
 }

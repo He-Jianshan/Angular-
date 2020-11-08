@@ -1,22 +1,32 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div fxLayout="column" fxLayoutAlign="space-between stretch" >
+  <div  fxLayout="row" fxLayoutAlign="space-between center">
+    <h3 class="title">User</h3>
+
+    <div class="title">
+      <button mat-fab color="primary" matTooltip="Add user" (click)="openInput()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
-   
     <!-- Name Column -->
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
   
-    <!-- Weight Column -->
+    <!-- Email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
   
-    <!-- Symbol Column -->
+    <!-- Roles Column -->
     <ng-container matColumnDef="roles">
       <th mat-header-cell *matHeaderCellDef> Role </th>
       <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
@@ -25,5 +35,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
   
   

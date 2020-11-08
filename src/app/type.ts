@@ -14,10 +14,10 @@ export interface IResponse {
     status: string;
 }
 
-export enum IStatus {
-    SUCCESS,
-    FAILURE,
-}
+export const SUCCESS  = "SUCCESS";
+export const FAILURE = "FAILURE";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 
 export interface IRole {
     name: string;

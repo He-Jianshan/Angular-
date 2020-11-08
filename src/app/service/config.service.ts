@@ -4,12 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
-  private  BASE_URL = "https://home.hejianshan.com/edge";
+  private ACCESS_KEY = '513276ca-bce3-446a-8dac-c9251fdd90ef';
+  private  BASE_URL = `https://home.hejianshan.com/access/${this.ACCESS_KEY}`;
   constructor() { }
   getLoginUrl() {
-    return `${this.BASE_URL}/login/token`;
+    return `${this.BASE_URL}/user/token`;
   }
   getLogoutUrl() {
-    return `${this.BASE_URL}/signout`
+    return `${this.BASE_URL}/user/logout`;
+  }
+  getUserUrl() {
+    return `${this.BASE_URL}/user/user`;
+  }
+  getRoleUrl() {
+    return `${this.BASE_URL}/user/role`;
   }
 }

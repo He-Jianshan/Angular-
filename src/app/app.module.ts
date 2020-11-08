@@ -19,6 +19,9 @@ import { environment } from 'src/environments/environment';
 import { MyState } from './service/mystate.service';
 import { UserComponent } from './user/user.component';
 import { RoleComponent } from './role/role.component';
+import { RoleFormComponent } from './form/role-form/role-form.component';
+import { UserFormComponent } from './form/user-form/user-form.component';
+import { SidebarStateService } from './service/sidebar-state.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { RoleComponent } from './role/role.component';
     MainComponent,
     LoginComponent,
     UserComponent,
-    RoleComponent
+    RoleComponent,
+    RoleFormComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ import { RoleComponent } from './role/role.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxsModule.forRoot([MyState], {
+    NgxsModule.forRoot([MyState, SidebarStateService], {
       developmentMode: !environment.production
     }),
  
@@ -45,6 +50,8 @@ import { RoleComponent } from './role/role.component';
   ],
   entryComponents: [
     LoginComponent,
+    RoleFormComponent,
+    UserFormComponent,
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
