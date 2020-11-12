@@ -5,3 +5,7 @@ table {
 .title {
   margin: 2em;
 }
+
+button {
+  margin: 12px;
+}

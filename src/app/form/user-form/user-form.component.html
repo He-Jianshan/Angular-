@@ -1,5 +1,5 @@
 
-<form class="user-form" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+<form class="user-form" fxLayout="column" fxLayoutAlign="space-evenly stretch" autocomplete="off">
     <div fxLayoutAlign="space-evenly"><h3>User</h3></div>
     <mat-form-field >
       <mat-label>Username</mat-label>
@@ -26,6 +26,31 @@
           Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
+    <mat-form-field class="roles-chip-list">
+      <mat-chip-list #chipList aria-label="Role selection">
+        <mat-chip
+          *ngFor="let role of roles"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(role)">
+          {{role.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="New role..."
+          #roleInput
+          [formControl]="rolesFormControl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let role of filteredRoles | async" [value]="role.name">
+          {{role.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>   
     <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center">
         <button mat-raised-button color="primary" (click)="submit()">Submit</button>
         <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>

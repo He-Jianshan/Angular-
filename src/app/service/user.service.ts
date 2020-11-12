@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUser } from '../type';
 
@@ -20,11 +20,15 @@ export class UserService {
     return this.httpClient.post<IUser>(this.config.getUserUrl(), user);
   }
 
-  updateUser(user: IUser): Observable<IUser> {
-    return this.httpClient.put<IUser>(this.config.getUserUrl(), user);
+  updateUser(username: string, user: IUser): Observable<IUser> {
+    return this.httpClient.patch<IUser>(this.config.getUserNameUrl(username), user);
   }
 
   deleteUser(user: IUser): Observable<IUser> {
-    return this.httpClient.delete<IUser>(this.config.getUserNameUrl(user.username));
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), 
+      body: user
+    };
+    return this.httpClient.delete<IUser>(this.config.getUserUrl(), httpOptions);
   }
 }

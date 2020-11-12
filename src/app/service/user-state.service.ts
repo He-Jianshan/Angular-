@@ -13,7 +13,7 @@ export class AddUserAction {
 }
 export class UpdateUserAction {
   static readonly type = "[User] Update";
-  constructor(public user: IUser){}
+  constructor(public username: string, public user: IUser){}
 }
 export class DeleteUserAction {
   static readonly type = "[User] Delete";
@@ -56,7 +56,7 @@ export class UserStateService {
   }
   @Action(UpdateUserAction)
   updateUserAction(ctx: StateContext<UserStateModel>, action: UpdateUserAction) {
-    this.userService.updateUser(action.user).subscribe(
+    this.userService.updateUser(action.username, action.user).subscribe(
       (users) => {
         this.store.dispatch(new ListUserAction());
     })
