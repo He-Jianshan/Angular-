@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ListRoleAction, AddRoleAction } from '../service/role-state.service';
+import { ListRoleAction, AddRoleAction, DeleteRoleAction } from '../service/role-state.service';
 import { RoleFormComponent } from '../form/role-form/role-form.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { RoleFormComponent } from '../form/role-form/role-form.component';
   styleUrls: ['./role.component.css']
 })
 export class RoleComponent implements OnInit {
-  displayedColumns: string[] = [ 'name'];
+  displayedColumns: string[] = [ 'name', 'action'];
   dataSource = new MatTableDataSource<IRole>([]);
 
   @Select(s => s.roles.roles) roles$: Observable<IRole[]>;
@@ -31,6 +31,12 @@ export class RoleComponent implements OnInit {
   }
   openInput(): void {
     this.dialog.open(RoleFormComponent, { disableClose: true });
+  }
+  openUpdate(role): void {
+    this.dialog.open(RoleFormComponent, { disableClose: true, data: role })
+  }
+  deleteRole(role: IRole): void {
+    this.store.dispatch(new DeleteRoleAction(role));
   }
  
 }

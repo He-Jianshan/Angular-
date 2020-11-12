@@ -14,7 +14,7 @@ export class AddRoleAction {
 }
 export class UpdateRoleAction {
   static readonly type = "[Role] Update";
-  constructor(public role: IRole){}
+  constructor(public name: string, public role: IRole){}
 }
 export class DeleteRoleAction {
   static readonly type = "[Role] Delete";
@@ -55,7 +55,7 @@ export class RoleStateService {
   }
   @Action(UpdateRoleAction)
   addRole(ctx: StateContext<RoleStateModel>, action: UpdateRoleAction) {
-    this.roleService.updateRole(action.role).subscribe(
+    this.roleService.updateRole(action.name, action.role).subscribe(
       r => this.store.dispatch(new ListRoleAction()));
   }
   @Action(DeleteRoleAction)

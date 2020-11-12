@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IRole } from '../type';
 
@@ -20,12 +20,17 @@ export class RoleService {
     return this.httpClient.post<IRole>(this.config.getRoleUrl(), role);
   }
 
-  updateRole(role: IRole): Observable<IRole> {
-    return this.httpClient.put<IRole>(this.config.getRoleUrl(), role);
+  updateRole(name:string, role: IRole): Observable<IRole> {
+    return this.httpClient.patch<IRole>(this.config.getRoleNameUrl(name), role);
   }
   
   deleteRole(role: IRole): Observable<IRole> {
-    return this.httpClient.delete<IRole>(this.config.getRoleNameUrl(role.name));
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), 
+      body: role
+    };
+
+    return this.httpClient.delete<IRole>(this.config.getRoleUrl(), httpOptions);
   }
   
 }
